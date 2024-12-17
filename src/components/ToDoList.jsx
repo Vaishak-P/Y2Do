@@ -12,10 +12,9 @@ const ToDoList = () => {
     const [deletedTaskIndex,setDeletedTaskIndex] = useState("")
     const [searchQuery,setSearchQuery] = useState("");
     const [filter,setFilter] = useState("all")
+    const [editingIndex,setEditingIndex] = useState(null);
+    const [editText,setEditText] = useState('');
 
-    // const handleInputChange = (event) => {
-    //     setNewTask(event.target.value);
-    // }
     const addTask = () =>{
         if (newTask.trim()!==''){
             const newTaskObject = {
@@ -26,6 +25,18 @@ const ToDoList = () => {
             setTasks(t=>[...t,newTaskObject]);
             setNewTask('');
         }
+    }
+    const editTask =(index,text) =>{
+        setEditingIndex(index);
+        setEditText(text);
+    }
+    const saveEdit = (index)=>{
+        const updatedTasks = tasks.map((task,i)=>
+            i===index ? {...tasks,text:editText} : task
+        );
+        setTasks(updatedTasks);
+        setEditText('');
+        setEditingIndex(null);
     }
     const deleteTask = (index) =>{
         const taskToDelete = tasks[index];
@@ -40,7 +51,7 @@ const ToDoList = () => {
         },3000);
     }
     const undoDeletedTask = () =>{
-        if(deletedTask&&deletedTaskIndex!= null){
+        if(deletedTask && deletedTaskIndex!= null){
             const updatedTasks = [...tasks];
             // array.splice(startINDEX, DELETECount, ADDitem1, ADDitem2, ...)
             updatedTasks.splice(deletedTaskIndex,0,deletedTask)
@@ -112,31 +123,50 @@ const ToDoList = () => {
                 <ol>
                     {filteredTasks.map((task,index) => 
                         <li key={task.id}>
-                            <span 
-                                id='text'
-                                onClick={()=> toggleTaskCompletion(index)}
-                                className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
-                            >
-                                {task.text}
-                            </span>
-                            <button 
-                                id='deleteButton'
-                                className='listContent'
-                                onClick={()=>deleteTask(index)}
-                            >Delete
-                            </button>
-                            <button 
-                                id='moveUpButton'
-                                className='listContent'
-                                onClick={()=>moveTaskUp(index)}
-                            >Up
-                            </button>
-                            <button 
-                                id='moveDownButton'
-                                className='listContent'
-                                onClick={()=>moveTaskDown(index)}
-                            >Down
-                            </button>
+                            {editingIndex=== index? (
+                                <>
+                                    <input
+                                        type='text'
+                                        value={editText}
+                                        onChange={(e)=> setEditText(e.target.value)}
+                                    />
+                                    <button onClick={()=> saveEdit(index)}>Save</button>
+                                </>
+                            ):(
+                                <>
+                                    <span 
+                                        id='text'
+                                        onClick={()=> toggleTaskCompletion(index)}
+                                        className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
+                                    >
+                                        {task.text}
+                                    </span>
+                                    <button 
+                                        id='editeButton'
+                                        className='listContent'
+                                        onClick={()=>editTask(index,task.text)}
+                                    >Edit
+                                    </button>
+                                    <button 
+                                        id='deleteButton'
+                                        className='listContent'
+                                        onClick={()=>deleteTask(index)}
+                                    >Delete
+                                    </button>
+                                    <button 
+                                        id='moveUpButton'
+                                        className='listContent'
+                                        onClick={()=>moveTaskUp(index)}
+                                    >Up
+                                    </button>
+                                    <button 
+                                        id='moveDownButton'
+                                        className='listContent'
+                                        onClick={()=>moveTaskDown(index)}
+                                    >Down
+                                    </button>
+                                </>
+                            )}
                         </li>
                     )}
                 </ol>
