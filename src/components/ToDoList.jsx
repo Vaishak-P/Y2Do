@@ -9,7 +9,7 @@ const ToDoList = () => {
     ]);
     const [newTask,setNewTask] = useState(""); 
     const [deletedTask,setDeletedTask] = useState("");
-    // const [deletedTaskIndex,setDeletedTaskIndex] = useState("")
+    const [deletedTaskIndex,setDeletedTaskIndex] = useState("")
 
     const handleInputChange = (event) => {
         setNewTask(event.target.value);
@@ -37,16 +37,16 @@ const ToDoList = () => {
             setDeletedTaskIndex(null);
         },3000);
     }
-    // const undoDeletedTask = () =>{
-    //     if(deletedTask&&deletedTaskIndex!= null){
-    //         const updatedTasks = [...tasks];
-    //         // array.splice(startINDEX, DELETECount, ADDitem1, ADDitem2, ...)
-    //         updatedTasks.splice(deletedTaskIndex,0,deletedTask)
-    //         setTasks(updatedTasks);
-    //         setDeletedTask(null);
-    //         setDeletedTaskIndex(null);
-    //     }
-    // }
+    const undoDeletedTask = () =>{
+        if(deletedTask&&deletedTaskIndex!= null){
+            const updatedTasks = [...tasks];
+            // array.splice(startINDEX, DELETECount, ADDitem1, ADDitem2, ...)
+            updatedTasks.splice(deletedTaskIndex,0,deletedTask)
+            setTasks(updatedTasks);
+            setDeletedTask(null);
+            setDeletedTaskIndex(null);
+        }
+    }
 
     const moveTaskUp = (index) =>{
         if(index>0){
@@ -120,7 +120,7 @@ const ToDoList = () => {
                     )}
                 </ol>
             </div>
-            {/* {deletedTask&&(
+            {deletedTask&&(
                 <div className='undoDeletedTask'>
                     <p>Task {deletedTask.text} deleted</p>
                     <button
@@ -128,7 +128,7 @@ const ToDoList = () => {
                     >Undo
                     </button>
                 </div>
-            )} */}
+            )}
             <div className="toDoFooter">
                 <p>Made with ❤ by Vaishak</p>
             </div>
