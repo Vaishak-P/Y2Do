@@ -10,10 +10,12 @@ const ToDoList = () => {
     const [newTask,setNewTask] = useState(""); 
     const [deletedTask,setDeletedTask] = useState("");
     const [deletedTaskIndex,setDeletedTaskIndex] = useState("")
+    const [searchQuery,setSearchQuery] = useState("");
+    const [filter,setFilter] = useState("all")
 
-    const handleInputChange = (event) => {
-        setNewTask(event.target.value);
-    }
+    // const handleInputChange = (event) => {
+    //     setNewTask(event.target.value);
+    // }
     const addTask = () =>{
         if (newTask.trim()!==''){
             const newTaskObject = {
@@ -68,6 +70,12 @@ const ToDoList = () => {
         );
         setTasks(updatedTasks);
     }
+    const filteredTasks = tasks.filter((task)=> {
+        const matchesSearch = task.text.toLowerCase().includes(searchQuery.toLowerCase())
+        if (filter==="active") return !task.completed && matchesSearch;
+        if (filter==="completed") return task.completed && matchesSearch;
+        return matchesSearch;
+    })
     
     return(
         <>
@@ -78,7 +86,7 @@ const ToDoList = () => {
                         type='text'
                         placeholder='Enter a task'
                         value={newTask}
-                        onChange={handleInputChange}
+                        onChange={(e)=>setNewTask(e.target.value)}
                     />
                     <button
                         className='addButton'
@@ -86,10 +94,23 @@ const ToDoList = () => {
                     >Add
                     </button>
                 </div>
+                <div className='searchContainer'>
+                    <input
+                        type='text'
+                        value={searchQuery}
+                        placeholder='Search ToDos'
+                        onChange={(e)=>setSearchQuery(e.target.value)}
+                    />
+                    <select value={filter} onChange={(e)=>setFilter(e.target.value)}>
+                            <option value='all'>All</option>
+                            <option value='active'>Active</option>
+                            <option value='completed'>Completed</option>
+                    </select>
+                </div>
             </div>
             <div className='toDoList'>
                 <ol>
-                    {tasks.map((task,index) => 
+                    {filteredTasks.map((task,index) => 
                         <li key={task.id}>
                             <span 
                                 id='text'
@@ -134,7 +155,7 @@ const ToDoList = () => {
             </div>
         </>
     )
-}
+}   
 export default ToDoList
 
 // FEATURES 
