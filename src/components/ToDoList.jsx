@@ -62,12 +62,12 @@ const ToDoList = () => {
             setTasks(updatedTasks);
         }
     }
-    // const toggleTaskCompletion = (index) =>{
-    //     const updatedTasks = tasks.map((task,i)=>
-    //         i===index? {...task, completed:!task.completed}:task
-    //     );
-    //     setTasks(updatedTasks);
-    // }
+    const toggleTaskCompletion = (index) =>{
+        const updatedTasks = tasks.map((task,i)=>
+            i===index? {...task, completed:!task.completed}:task
+        );
+        setTasks(updatedTasks);
+    }
     
     return(
         <>
