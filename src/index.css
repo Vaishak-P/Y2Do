@@ -28,18 +28,16 @@ body {
   left: 50%;
   transform: translate(-50% ,-50%); */
   background: linear-gradient(45deg,#117e4b, #000000, #18d19a, #000000, #32f17b, #000000);
-    background-size: 300% 300%;
-    animation: gradientAnimation 10s ease infinite;
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s ease infinite;
 }
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
-
   100% {
     background-position: 0% 50%;
   }
@@ -78,7 +76,7 @@ input[type='text']::placeholder {
 .toDoHead,.toDoList{
   height: 80vh;
   border-radius: 20px;
-  box-shadow: 0px 0px 15px var(--primary);
+  /* box-shadow: 0px 0px 15px var(--primary); */
   background-color: var(--containerBgColor);
 }
 .toDoHead{
@@ -89,8 +87,10 @@ input[type='text']::placeholder {
   flex-direction: column;
   justify-content: center;
   transition: all 0.5s;
+  position: relative;
   /* background-color: #fff; */
 }
+
 .toDoHead:hover{
   box-shadow: 0 0 10px var(--secondary);
   
@@ -132,6 +132,18 @@ input[type='text']::placeholder {
   border: 2px solid var(--secondary);
   size: 80px;
 }
+.toDoFooter {
+  /* text-align: center; */
+  font-size: 10px;
+  color: var(--textColor);
+  text-transform: uppercase;
+  /* letter-spacing: 2px; */
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  bottom: 0px;
+  /* background-color: aliceblue; */
+}
 
 /* .addButton:hover {
   background-color: rgb(0, 143, 98);
@@ -143,6 +155,7 @@ input[type='text']::placeholder {
 .toDoList {
   width: 700px;
   /* position: relative; */
+  position: relative;
   padding-bottom: 30px;
   font-family: poppins;
   text-align: center;
@@ -159,7 +172,21 @@ input[type='text']::placeholder {
   gap: 30px;
   backdrop-filter: blur(20px);
   border-radius: 20px 20px 0 0;
-  background-image: linear-gradient(to top, rgba(0,0,0,0),rgb(0,0,0));
+  /* background-color: var(--bgColor);
+  background-color: var(--secondary); */
+  /* background-image: linear-gradient (to top, rgba(0,0,0,0),rgb(0,0,0)); */
+}
+.searchContainer::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--containerBgColor);
+  opacity: 0.8;
+  z-index: -1;
+  border-radius: 20px;
 }
 select{
   /* padding: 10px; */
@@ -171,27 +198,30 @@ select{
   background-color: var(--elementBgColor);
   cursor: pointer;
 }
-ol {
+.olContainer{
+  height: 95%;
   padding: 100px 30px 30px 30px;
-  max-height: calc(100vh - 60px);
+  /* max-height: calc(100vh - 60px); */
   margin-bottom: 30px;
-
 }
 ol li {
   list-style: none;
-  margin: 10px;
-  padding: 5px;
+  margin: 10px 0;
+  padding: 5px ;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   border-radius: 50px;
   transition: all 0.3s;
 }
 ol li:hover{
   background-color: var(--elementBgColor);
+  gap: 10px;
 }
 ol #text {
-  padding: 5px 40px;
+  max-width: 400px;
+  padding: 5px 20px;
+  word-wrap: break-word;
   /* flex: 1; */
   background-color: var(--primary);
   border-radius: 50px;
@@ -216,6 +246,9 @@ ol #text {
   font-size: 0.8rem;
   text-transform: uppercase;
 }
+.listButton:hover,.listButtonDisabled:hover{
+  /* padding: ; */
+}
 #saveEditButton{
   margin-right: 10px;
   background-image: linear-gradient(to right top, var(--primary), var(--secondary));
@@ -231,6 +264,62 @@ ol #text {
 }
 .textCompletedFalse{
   text-decoration: none;
+}
+.notificationContainer{
+  width: inherit;
+  padding: 5px;
+  font-size: 10px;
+  color: var(--textColor);
+  text-transform: uppercase;
+  position: fixed;
+  backdrop-filter: blur(20px);
+  border-radius: 0px 0px 20px 20px;
+  /* border: 2px solid green; */
+  /* letter-spacing: 2px; */
+  /* position: fixed; */
+  /* left: 50%; */
+  /* transform: translate(-50%,-50%); */
+  /* bottom: 0px; */
+}
+.notificationContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--containerBgColor);
+  opacity: 0.8;
+  z-index: -1;
+  border-radius: 20px;
+}
+.undoDeletedTask{
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  /* bottom: 0px; */
+  /* position: absolute; */
+  /* text-align: center; */
+  font-size: 10px;
+  color: var(--textColor);
+  text-transform: uppercase;
+
+}
+.undoDeletedTask span{
+  color: var(--inputTextColor);
+  font-weight: 500;
+}
+.undoDeletedTask button{
+  padding: 2px 5px;
+  color: var(--elementBgColor);
+  font-weight: bold;
+  background-color: var(--secondary);
+  font-size: 10px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
 }
 /* #editButtonActive{
   color: #18d19a;
