@@ -12,15 +12,15 @@ const ToDoList = () => {
 
     // const [tasks,setTasks] = useState(['eat','code','sleep']);
     const [tasks,setTasks] = useState([
-        {id:1,text:'eat',completed:false},
-        {id:2,text:'code',completed:false},
-        {id:3,text:'sleep',completed:false},
-        {id:4,text:'eat',completed:false},
-        {id:5,text:'code',completed:false},
-        {id:6,text:'sleep',completed:false},
-        {id:7,text:'eat',completed:false},
-        {id:8,text:'code',completed:false},
-        {id:9,text:'code',completed:false},
+        {id:1,text:'aeat',completed:false},
+        {id:2,text:'bcode',completed:false},
+        {id:3,text:'csleep',completed:false},
+        {id:4,text:'deat',completed:false},
+        {id:5,text:'ecode',completed:false},
+        {id:6,text:'fsleep',completed:false},
+        {id:7,text:'heat',completed:false},
+        {id:8,text:'wcode',completed:false},
+        {id:9,text:'zcode',completed:false},
         // {id:3,text:'sleep',completed:false},
         // {id:1,text:'eat',completed:false},
         // {id:2,text:'code',completed:false},
@@ -44,7 +44,9 @@ const ToDoList = () => {
                 text:newTask,
                 completed:false
             }
-            setTasks(t=>[...t,newTaskObject]);
+            const updatedTasks = [...tasks,newTaskObject]
+            updatedTasks.sort((a,b)=>b.id-a.id)
+            setTasks(updatedTasks);
             setNewTask('');
         }
     }
@@ -70,7 +72,7 @@ const ToDoList = () => {
         setTimeout(()=>{
             setDeletedTask(null);
             setDeletedTaskIndex(null);
-        },3000);
+        },5000);
     }
     const undoDeletedTask = () =>{
         if(deletedTask && deletedTaskIndex!= null){
@@ -109,11 +111,14 @@ const ToDoList = () => {
         if (filter==="completed") return task.completed && matchesSearch;
         return matchesSearch;
     })
+    const truncateText = (text) =>{
+        return text.length > 35 ? text.substring(0,35) + '...' : text
+    }
     
     return(
         <div className='bodyContainer'>
             <div className='mainContainer'>
-                {/* HEAD  */}
+                {/* ===============HEAD========  */}
                 <div className='toDoHead'>
                     <h1 className='y2doTitle'>Y2Do</h1>
                     <div className='newTaskInputContainer'>
@@ -126,7 +131,7 @@ const ToDoList = () => {
                                 if(e.key==='Enter'){
                                     addTask();
                                 }
-                            }}
+                        }}
                             className='newTaskInput'
                         />
                         <button
@@ -136,8 +141,11 @@ const ToDoList = () => {
                             <FontAwesomeIcon icon={faPlus} />
                         </button>
                     </div>
+                    <div className="toDoFooter">
+                        <p>Made with ❤ by Vaishak</p>
+                    </div>
                 </div>
-                {/* LIST  */}
+                {/* =============TODOLIST ============ */}
                 <div className='toDoList'>
                     <div className='searchContainer'>
                         <input
@@ -153,69 +161,88 @@ const ToDoList = () => {
                                 <option value='completed'>Completed</option>
                         </select>
                     </div>
-                    <ol>
-                        {filteredTasks.map((task,index) => 
-                            <li key={task.id}>
-                                {editingIndex=== index? (
-                                    <>
-                                        <input
-                                            type='text'
-                                            value={editText}
-                                            onChange={(e)=> setEditText(e.target.value)}
-                                        />
-                                        <button 
-                                            id='saveEditButton'
-                                            className={task.completed?'listbuttonDisabled':'listButton'}
-                                            onClick={()=> saveEdit(index)}
+
+                    <div className='olContainer'>
+                        <ol>
+                            {filteredTasks.map((task,index) =>
+                                <li key={task.id}>
+                                    {/*======== IF EDITING ON ========== */}
+                                    {editingIndex=== index? (
+                                        <>
+                                            <input
+                                                type='text'
+                                                value={editText}
+                                                onChange={(e)=> setEditText(e.target.value)}
+                                            />
+                                            <button
+                                                id='saveEditButton'
+                                                className={task.completed?'listbuttonDisabled':'listButton'}
+                                                onClick={()=> saveEdit(index)}
+                                                >
+                                                <FontAwesomeIcon icon={faFloppyDisk}/>
+                                            </button>
+                                        </>
+                                    ):(
+                                        <>
+                                        {/*======== IF EDITING OFF ========== */}
+                                            <span
+                                                id='text'
+                                                onClick={()=> toggleTaskCompletion(index)}
+                                                className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
                                             >
-                                            <FontAwesomeIcon icon={faFloppyDisk}/>
-                                        </button>
-                                    </>
-                                ):(
-                                    <>
-                                        <span 
-                                            id='text'
-                                            onClick={()=> toggleTaskCompletion(index)}
-                                            className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
-                                        >
-                                            {task.text}
-                                        </span>
-                                        <button 
-                                            id='editButton'
-                                            // id={task.completed? 'editButtonActive':'editButtonDisabled'}
-                                            className={task.completed?'listbuttonDisabled':'listButton'}
-                                            onClick={()=>editTask(index,task.text)}
-                                        >
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                        </button> 
-                                        <button 
-                                            id='deleteButton'
-                                            className={task.completed?'listbuttonDisabled':'listButton'}
-                                            onClick={()=>deleteTask(index)}
-                                        >
-                                            <FontAwesomeIcon icon={faTrash} />
-                                        </button>
-                                        <button 
-                                            id='moveUpButton'
-                                            className={task.completed?'listbuttonDisabled':'listButton'}
-                                            onClick={()=>moveTaskUp(index)}
-                                        >
-                                            <FontAwesomeIcon icon={faArrowUp} />
-                                        </button>
-                                        <button 
-                                            id='moveDownButton'
-                                            className={task.completed?'listbuttonDisabled':'listButton'}
-                                            onClick={()=>moveTaskDown(index)}
-                                        >
-                                            <FontAwesomeIcon icon={faArrowDown} />
-                                        </button>
-                                    </>
-                                )}
-                            </li>
-                        )}
-                    </ol> 
-                </div>
-                {deletedTask&&(
+                                                {truncateText(task.text)}
+                                            </span>
+                                            <button
+                                                id='editButton'
+                                                className={task.completed?'listbuttonDisabled':'listButton'}
+                                                onClick={()=>editTask(index,task.text)}
+                                            >
+                                            <FontAwesomeIcon icon={faPenToSquare} />
+                                            </button>
+                                            <button
+                                                id='deleteButton'
+                                                className={task.completed?'listbuttonDisabled':'listButton'}
+                                                onClick={()=>deleteTask(index)}
+                                            >
+                                                <FontAwesomeIcon icon={faTrash} />
+                                            </button>
+                                            <button
+                                                id='moveUpButton'
+                                                className={task.completed?'listbuttonDisabled':'listButton'}
+                                                onClick={()=>moveTaskUp(index)}
+                                            >
+                                                <FontAwesomeIcon icon={faArrowUp} />
+                                            </button>
+                                            <button
+                                                id='moveDownButton'
+                                                className={task.completed?'listbuttonDisabled':'listButton'}
+                                                onClick={()=>moveTaskDown(index)}
+                                            >
+                                                <FontAwesomeIcon icon={faArrowDown} />
+                                            </button>
+                                        </>
+                                    )}
+                                </li>
+                            )}
+                        </ol>
+                    </div>
+                    <div className='notificationContainer'>
+                        {
+                            deletedTask? (
+                                <div className='undoDeletedTask'>
+                                    <p>Task <span>{deletedTask.text}</span> deleted</p>
+                                    <button
+                                        onClick={undoDeletedTask}
+                                    >Undo
+                                    </button>
+                                </div>
+                            ):(
+                                <p>Click on a task name to mark it as completed</p>
+                            )
+                        }
+                    </div>
+                {/* ========deleted popup========== */}
+                {/* {deletedTask&&(
                     <div className='undoDeletedTask'>
                         <p>Task {deletedTask.text} deleted</p>
                         <button
@@ -223,10 +250,8 @@ const ToDoList = () => {
                         >Undo
                         </button>
                     </div>
-                )}
-            </div>
-            <div className="toDoFooter">
-                <p>Made with ❤ by Vaishak</p>
+                )} */}
+                </div>
             </div>
         </div>
     )
