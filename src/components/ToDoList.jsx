@@ -158,7 +158,7 @@ const ToDoList = () => {
                         <select value={filter} onChange={(e)=>setFilter(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='active'>Active</option>
-                                <option value='completed'>Completed</option>
+                                <option value='completed'>Hidden</option>
                         </select>
                     </div>
 
@@ -189,6 +189,7 @@ const ToDoList = () => {
                                                 id='text'
                                                 onClick={()=> toggleTaskCompletion(index)}
                                                 className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
+                                                title={task.text} // Shows full text as a tooltip
                                             >
                                                 {truncateText(task.text)}
                                             </span>
@@ -237,7 +238,7 @@ const ToDoList = () => {
                                     </button>
                                 </div>
                             ):(
-                                <p>Click on a task name to mark it as completed</p>
+                                <p>Click on a task name to mark it as hidden</p>
                             )
                         }
                     </div>
