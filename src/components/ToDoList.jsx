@@ -21,13 +21,6 @@ const ToDoList = () => {
         {id:7,text:'heat',completed:false},
         {id:8,text:'wcode',completed:false},
         {id:9,text:'zcode',completed:false},
-        // {id:3,text:'sleep',completed:false},
-        // {id:1,text:'eat',completed:false},
-        // {id:2,text:'code',completed:false},
-        // {id:3,text:'sleep',completed:false},
-        // {id:1,text:'eat',completed:false},
-        // {id:2,text:'code',completed:false},
-        // {id:3,text:'sleep',completed:false}
     ]);
     const [newTask,setNewTask] = useState(""); 
     const [deletedTask,setDeletedTask] = useState("");
@@ -131,7 +124,7 @@ const ToDoList = () => {
                                 if(e.key==='Enter'){
                                     addTask();
                                 }
-                        }}
+                            }}
                             className='newTaskInput'
                         />
                         <button
@@ -164,66 +157,79 @@ const ToDoList = () => {
 
                     <div className='olContainer'>
                         <ol>
-                            {filteredTasks.map((task,index) =>
-                                <li key={task.id}>
-                                    {/*======== IF EDITING ON ========== */}
-                                    {editingIndex=== index? (
-                                        <>
-                                            <input
-                                                type='text'
-                                                value={editText}
-                                                onChange={(e)=> setEditText(e.target.value)}
-                                            />
-                                            <button
-                                                id='saveEditButton'
-                                                className={task.completed?'listbuttonDisabled':'listButton'}
-                                                onClick={()=> saveEdit(index)}
+                            {filteredTasks.length==0? (
+                                <div className='emptyContainer'>
+                                    <img src='/src/assets/no-task.png' alt='empty' />
+                                    <h2 className='emptyHeading'><span>empty</span> here</h2>
+                                    <h6 className='emptySubheading'>Add your tasks now!</h6>
+                                </div>
+                            ):(
+                                filteredTasks.map((task,index) =>
+                                    <li key={task.id}>
+                                        {/*======== IF EDITING ON ========== */}
+                                        {editingIndex=== index? (
+                                            <>
+                                                <input
+                                                    type='text'
+                                                    value={editText}
+                                                    onChange={(e)=> setEditText(e.target.value)}
+                                                    onKeyDown={(e)=>{
+                                                        if(e.key==='Enter'){
+                                                            saveEdit(index);
+                                                        }
+                                                    }}
+                                                />
+                                                <button
+                                                    id='saveEditButton'
+                                                    className={task.completed?'listbuttonDisabled':'listButton'}
+                                                    onClick={()=> saveEdit(index)}
                                                 >
                                                 <FontAwesomeIcon icon={faFloppyDisk}/>
-                                            </button>
-                                        </>
-                                    ):(
-                                        <>
-                                        {/*======== IF EDITING OFF ========== */}
-                                            <span
-                                                id='text'
-                                                onClick={()=> toggleTaskCompletion(index)}
-                                                className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
-                                                title={task.text} // Shows full text as a tooltip
-                                            >
-                                                {truncateText(task.text)}
-                                            </span>
-                                            <button
-                                                id='editButton'
-                                                className={task.completed?'listbuttonDisabled':'listButton'}
-                                                onClick={()=>editTask(index,task.text)}
-                                            >
-                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                            </button>
-                                            <button
-                                                id='deleteButton'
-                                                className={task.completed?'listbuttonDisabled':'listButton'}
-                                                onClick={()=>deleteTask(index)}
-                                            >
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                            <button
-                                                id='moveUpButton'
-                                                className={task.completed?'listbuttonDisabled':'listButton'}
-                                                onClick={()=>moveTaskUp(index)}
-                                            >
-                                                <FontAwesomeIcon icon={faArrowUp} />
-                                            </button>
-                                            <button
-                                                id='moveDownButton'
-                                                className={task.completed?'listbuttonDisabled':'listButton'}
-                                                onClick={()=>moveTaskDown(index)}
-                                            >
-                                                <FontAwesomeIcon icon={faArrowDown} />
-                                            </button>
-                                        </>
-                                    )}
-                                </li>
+                                                </button>
+                                            </>
+                                        ):(
+                                            <>
+                                            {/*======== IF EDITING OFF ========== */}
+                                                <span
+                                                    id='text'
+                                                    onClick={()=> toggleTaskCompletion(index)}
+                                                    className={task.completed? 'textCompletedTrue':'textCompletedFalse'}
+                                                    title={task.text} // Shows full text as a tooltip
+                                                >
+                                                    {truncateText(task.text)}
+                                                </span>
+                                                <button
+                                                    id='editButton'
+                                                    className={task.completed?'listbuttonDisabled':'listButton'}
+                                                    onClick={()=>editTask(index,task.text)}
+                                                >
+                                                <FontAwesomeIcon icon={faPenToSquare} />
+                                                </button>
+                                                <button
+                                                    id='deleteButton'
+                                                    className={task.completed?'listbuttonDisabled':'listButton'}
+                                                    onClick={()=>deleteTask(index)}
+                                                >
+                                                    <FontAwesomeIcon icon={faTrash} />
+                                                </button>
+                                                <button
+                                                    id='moveUpButton'
+                                                    className={task.completed?'listbuttonDisabled':'listButton'}
+                                                    onClick={()=>moveTaskUp(index)}
+                                                >
+                                                    <FontAwesomeIcon icon={faArrowUp} />
+                                                </button>
+                                                <button
+                                                    id='moveDownButton'
+                                                    className={task.completed?'listbuttonDisabled':'listButton'}
+                                                    onClick={()=>moveTaskDown(index)}
+                                                >
+                                                    <FontAwesomeIcon icon={faArrowDown} />
+                                                </button>
+                                            </>
+                                        )}
+                                    </li>
+                                )
                             )}
                         </ol>
                     </div>
