@@ -220,6 +220,37 @@ select  option li{
   background-color: #117e4b;
   color: aqua;
 }
+
+/* ========ol container=========== */
+.emptyContainer{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  gap: 10px;
+  /* position: relative; */
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.emptyContainer img{
+  /* position: absolute; */
+  margin-top: 80px;
+  width: 100px;
+  height: 100px;
+  transition: all 0.3s;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50% ,-50%); */
+}
+.emptyContainer img:hover{
+  rotate: 5deg;
+}
+.emptyHeading{
+  font-weight: 500px;
+  /* padding-top: 150px; */
+}
+.emptyHeading span{
+  font-weight: 900;
+}
 .olContainer{
   height: 95%;
   padding: 100px 30px 30px 30px;
