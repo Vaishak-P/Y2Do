@@ -7,21 +7,21 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
-
+ 
 const ToDoList = () => {
 
-    // const [tasks,setTasks] = useState(['eat','code','sleep']);
-    const [tasks,setTasks] = useState([
-        {id:1,text:'aeat',completed:false},
-        {id:2,text:'bcode',completed:false},
-        {id:3,text:'csleep',completed:false},
-        {id:4,text:'deat',completed:false},
-        {id:5,text:'ecode',completed:false},
-        {id:6,text:'fsleep',completed:false},
-        {id:7,text:'heat',completed:false},
-        {id:8,text:'wcode',completed:false},
-        {id:9,text:'zcode',completed:false},
-    ]);
+    const [tasks,setTasks] = useState([]);
+    // const [tasks,setTasks] = useState([
+    //     {id:1,text:'aeat',completed:false},
+    //     {id:2,text:'bcode',completed:false},
+    //     {id:3,text:'csleep',completed:false},
+    //     {id:4,text:'deat',completed:false},
+    //     {id:5,text:'ecode',completed:false},
+    //     {id:6,text:'fsleep',completed:false},
+    //     {id:7,text:'heat',completed:false},
+    //     {id:8,text:'wcode',completed:false},
+    //     {id:9,text:'zcode',completed:false},
+    // ]);
     const [newTask,setNewTask] = useState(""); 
     const [deletedTask,setDeletedTask] = useState("");
     const [deletedTaskIndex,setDeletedTaskIndex] = useState("")
@@ -135,7 +135,7 @@ const ToDoList = () => {
                         </button>
                     </div>
                     <div className="toDoFooter">
-                        <p>Made with ❤ by Vaishak</p>
+                        <a href="https://www.linkedin.com/in/vaishakpanakkat/"><p>Made with ❤ by Y</p></a>
                     </div>
                 </div>
                 {/* =============TODOLIST ============ */}
