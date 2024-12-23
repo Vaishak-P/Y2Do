@@ -27,8 +27,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50% ,-50%); */
-  background: linear-gradient(45deg,#117e4b, #000000, #18d19a, #000000, #32f17b, #000000);
-  background-size: 300% 300%;
+  /* background: linear-gradient(45deg,#000000,#0ab179,#020000, #18d19a, #000000,
+    #001f0d, #03e788, #000000); */
+    background: linear-gradient(30deg,#000,#001d0e,#01f081,#000 ,#02f7ad ,#002412,#000);
+    /* background-color: #08ea6d; */
+      /* background-image: linear-gradient(0deg, #08ea6d 0%, #2af5be 100%); */
+  background-size: 900% 900%;
   animation: gradientAnimation 10s ease infinite;
 }
 @keyframes gradientAnimation {
@@ -71,6 +75,7 @@ input[type='text']::placeholder {
 .mainContainer{
   display: grid;
   grid-template-columns: 1fr 2fr;
+  gap:5vw
 }
 /* =========TODO HEAD ========= */
 .toDoHead,.toDoList{
@@ -105,10 +110,6 @@ input[type='text']::placeholder {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/* .newTaskInput{
-} */
-
-
 .addButton {
   /* position: absolute; */
   height: 50px;
@@ -132,9 +133,11 @@ input[type='text']::placeholder {
   border: 2px solid var(--secondary);
   size: 80px;
 }
-.toDoFooter {
+.toDoFooter a{
   /* text-align: center; */
+  text-decoration: none;
   font-size: 10px;
+  text-align: center;
   color: var(--textColor);
   text-transform: uppercase;
   /* letter-spacing: 2px; */
@@ -153,7 +156,8 @@ input[type='text']::placeholder {
 
 /* =======TO DO LIST======= */
 .toDoList {
-  width: 700px;
+  width: 50vw;
+  max-width: 700px;
   /* position: relative; */
   position: relative;
   padding-bottom: 30px;
@@ -255,7 +259,7 @@ select  option li{
   height: 95%;
   padding: 100px 30px 30px 30px;
   /* max-height: calc(100vh - 60px); */
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 ol li {
   list-style: none;
@@ -284,11 +288,6 @@ ol #text {
   white-space: nowrap;
   /* position: relative; */
 }
-/* ol #text:hover::after{
-  background-image: linear-gradient(to right top, var(--primary), var(--secondary));
-  content: attr(title);
-  position: absolute;
-} */
 .listButton {
   padding: 10px 20px;
   border: none;
@@ -379,89 +378,80 @@ ol #text {
   border-radius: 20px;
   cursor: pointer;
 }
-/* #editButtonActive{
-  color: #18d19a;
-}
-#editButtonDisables{
-  color: red;
-}
-#deleteButton:hover {
-  background-color: rgb(143, 21, 0);
-}
 
-#moveUpButton:hover {
-  background-color: rgb(3, 147, 205);
-}
-
-#moveDownButton:hover {
-  background-color: rgb(3, 147, 205);
-} */
-
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+ @media(max-width:500px) {
+   .mainContainer{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    
+   }
+   .toDoHead{
+    width: 80vw;
+    height: 30vh;
+    /* margin-top: 10vh; */
+    padding: 5vw;
+    margin: 0;
   }
-  a:hover {
-    color: #747bff;
+  .newTaskInputContainer{
+    display: flex;
+     flex-direction: row;
+   }
+   .addButton, input{
+    padding: 0%;
+    margin: 1vw;
+    width: 20vw;
+   }
+   .toDoList{
+    width: 80vw;
+    height: 60vh;
+    padding: 0;
+    position: relative;
+    /* overflow-y: auto; */
+   }
+   .searchContainer {
+    width:inherit;
+    position: fixed;
+    border-radius: 20px;
+   }
+    .toDoList select, .toDoList input{
+      height: 5vh;
+      margin: 0px;
+      /* padding: 0; */
+      /* margin-bottom: 3vh; */
+    }
+    .olContainer{
+      padding:12vh 1vw;
+      scale: 90%;
+    }
+    ol li{
+      gap: 1.5vw;
+    }
+    ol li:hover{
+      gap: 1vw;
+    }
+    ol #text {
+      max-width: 200px;
+    }
+    .listButton{
+      padding: 10px 15px
+    }
+    .notificationContainer {
+      bottom: 10px;
+      position: fixed;
+      backdrop-filter: blur(20px);
+      border-radius: 0px 0px 20px 20px;
+    }
+ }
+ @media(min-width:501px)and(max-width:730px) {
+  .y2doTitle{
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    margin-bottom: 20px;
+    text-align: center;
   }
-  button {
-    background-color: #f9f9f9;
+  .toDoHead button{
+    margin-bottom: 5vh;
   }
-} */
+}
