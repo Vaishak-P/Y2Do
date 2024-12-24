@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import emptyImage from '/src/assets/no-task.png'
 //import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -159,7 +160,7 @@ const ToDoList = () => {
                         <ol>
                             {filteredTasks.length==0? (
                                 <div className='emptyContainer'>
-                                    <img src='/src/assets/no-task.png' alt='empty' />
+                                    <img src={emptyImage} alt='empty'/>
                                     <h2 className='emptyHeading'><span>empty</span> here</h2>
                                     <h6 className='emptySubheading'>Add your tasks now!</h6>
                                 </div>
