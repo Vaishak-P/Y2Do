@@ -438,7 +438,7 @@ ol #text {
       padding: 10px 15px
     }
     .notificationContainer {
-      bottom: 10px;
+      bottom: 3vh;
       position: fixed;
       backdrop-filter: blur(20px);
       border-radius: 0px 0px 20px 20px;
