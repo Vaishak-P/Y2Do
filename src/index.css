@@ -161,7 +161,6 @@ input[type='text']::placeholder {
   /* position: relative; */
   position: relative;
   padding-bottom: 30px;
-  font-family: poppins;
   text-align: center;
   overflow-y: auto;
 }
