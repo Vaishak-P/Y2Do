@@ -1,0 +1,54 @@
+@use 'base';
+@use 'mixins';
+@use 'variables';
+.toDoHead,
+.toDoList {
+    height: 80vh;
+    border-radius: 20px;
+    background-color: variables.$containerBgColor;
+}
+.toDoHead {
+    @include mixins.flexCenter;
+    flex-direction: column;
+    width: 20vw;
+    max-width: 500px;
+    padding: 20px;
+    transition: all 0.5s;
+    position: relative;
+    &:hover {
+        box-shadow: 0 0 10px variables.$secondaryColor;
+    }
+    .y2doTitle {
+        font-size: 3rem;
+        border-radius: 20px;
+        background: linear-gradient(90deg, variables.$primaryColor, variables.$secondaryColor);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .addButton {
+        @include mixins.buttonStyle(1.5rem);
+        width: 100%;
+        height: 50px;
+        margin-top: 20px;
+        background-image: linear-gradient(to right top, variables.$primaryColor, variables.$secondaryColor);
+        color:variables.$containerBgColor;
+        &:hover {
+            color: variables.$secondaryColor;
+            background-color: variables.$containerBgColor;
+            background-image: none;
+            border: 2px solid variables.$secondaryColor;
+            size: 80px;
+        }
+    }
+    .toDoFooter a{
+        text-decoration: none;
+        font-size: 10px;
+        text-align: center;
+        color:variables.$textColor;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        bottom: 0px;
+}
+}

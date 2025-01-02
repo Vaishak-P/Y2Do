@@ -1,0 +1,86 @@
+@use 'variables';
+@use 'mixins';
+* {
+    margin: 0;
+    padding: 0;
+}
+// Set box-sizing globally
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    @include mixins.flexCenter();
+    @include mixins.fullHeightWidth();
+    font-family: poppins;
+    background-size: 900% 900%;
+    animation: gradientAnimation 10s ease infinite;
+    background-image: linear-gradient(30deg,#000,#001d0e,#01f081,#000 ,#02f7ad ,#002412,#000);
+ 
+}
+@keyframes gradientAnimation { 
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+input[type='text'] {
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 50px;
+    transition: all 0.5s;
+    border-radius: 50px;
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 15px;
+    color:variables.$inputTextColor;
+    background-color: variables.$elementBgColor;
+    &:focus {
+        box-shadow: 0 0 10px variables.$secondaryColor;
+        color: variables.$inputTextColor;
+        letter-spacing: 2px;
+    }
+    &::placeholder {
+        text-transform: uppercase;
+        color: variables.$textColor;
+        font-size: 12px;
+    }
+}
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5vw
+}
+select {
+    @include mixins.buttonStyle();
+    padding: 10px 30px;
+    color: variables.$textColor;
+    background-color: variables.$elementBgColor;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20viewBox%3D'0%200%204%205'%3E%3Cpath%20fill%3D'%2311998e'%20d%3D'M2%200L4%202H0L2%200z'%2F%3E%3C/svg%3E");
+    /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 10px;
+    &:focus {
+        box-shadow: 0 0 10px var(--secondary);
+    }
+    select option {
+        color: var(--textColor);
+        background-color: var(--elementBgColor);
+        border-radius: 50px;
+        display: flex;
+    }
+}

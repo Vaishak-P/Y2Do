@@ -1,0 +1,43 @@
+@use 'variables';
+@mixin buttonStyle($font-size:0.8rem) {
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: $font-size;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin fullHeightWidth {
+    min-height: 100vh;
+    width: 100vw;
+
+}
+@mixin blurBox($border-radius:20px 20px 0 0){
+    width: inherit;
+    position: fixed;
+    backdrop-filter: blur(20px);
+    border-radius: $border-radius;
+}
+@mixin blurBoxBefore( $border-radius:20px 20px 0 0){
+    border-radius:$border-radius;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: variables.$containerBgColor;
+    opacity: 0.8;
+    z-index: -1;
+}

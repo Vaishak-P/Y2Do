@@ -1,0 +1,421 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  font-family: poppins;
+  background-size: 900% 900%;
+  animation: gradientAnimation 10s ease infinite;
+  background-image: linear-gradient(30deg, #000, #001d0e, #01f081, #000, #02f7ad, #002412, #000);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+input[type=text] {
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 50px;
+  transition: all 0.5s;
+  border-radius: 50px;
+  text-align: center;
+  letter-spacing: 4px;
+  font-size: 15px;
+  color: white;
+  background-color: rgb(36, 36, 36);
+}
+input[type=text]:focus {
+  box-shadow: 0 0 10px rgb(56, 239, 125);
+  color: white;
+  letter-spacing: 2px;
+}
+input[type=text]::placeholder {
+  text-transform: uppercase;
+  color: rgb(183, 253, 210);
+  font-size: 12px;
+}
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5vw;
+}
+
+select {
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  padding: 10px 30px;
+  color: rgb(183, 253, 210);
+  background-color: rgb(36, 36, 36);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D'http%3A//www.w3.org/2000/svg'%20viewBox%3D'0%200%204%205'%3E%3Cpath%20fill%3D'%2311998e'%20d%3D'M2%200L4%202H0L2%200z'%2F%3E%3C/svg%3E");
+  /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 10px;
+}
+select:focus {
+  box-shadow: 0 0 10px var(--secondary);
+}
+select select option {
+  color: var(--textColor);
+  background-color: var(--elementBgColor);
+  border-radius: 50px;
+  display: flex;
+}
+
+.toDoHead,
+.toDoList {
+  height: 80vh;
+  border-radius: 20px;
+  background-color: rgb(12, 12, 12);
+}
+
+.toDoHead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 20vw;
+  max-width: 500px;
+  padding: 20px;
+  transition: all 0.5s;
+  position: relative;
+}
+.toDoHead:hover {
+  box-shadow: 0 0 10px rgb(56, 239, 125);
+}
+.toDoHead .y2doTitle {
+  font-size: 3rem;
+  border-radius: 20px;
+  background: linear-gradient(90deg, rgb(17, 153, 142), rgb(56, 239, 125));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.toDoHead .addButton {
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  background-image: linear-gradient(to right top, rgb(17, 153, 142), rgb(56, 239, 125));
+  color: rgb(12, 12, 12);
+}
+.toDoHead .addButton:hover {
+  color: rgb(56, 239, 125);
+  background-color: rgb(12, 12, 12);
+  background-image: none;
+  border: 2px solid rgb(56, 239, 125);
+  size: 80px;
+}
+.toDoHead .toDoFooter a {
+  text-decoration: none;
+  font-size: 10px;
+  text-align: center;
+  color: rgb(183, 253, 210);
+  text-transform: uppercase;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0px;
+}
+
+.toDoList {
+  width: 50vw;
+  max-width: 700px;
+  position: relative;
+  padding-bottom: 30px;
+  text-align: center;
+  overflow-y: auto;
+}
+.toDoList::-webkit-scrollbar {
+  display: none;
+}
+.toDoList .searchContainer {
+  width: inherit;
+  position: fixed;
+  backdrop-filter: blur(20px);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  padding: 30px;
+  gap: 30px;
+  z-index: 1;
+}
+.toDoList .searchContainer::before {
+  border-radius: 20px 20px 0 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(12, 12, 12);
+  opacity: 0.8;
+  z-index: -1;
+}
+.toDoList .emptyContainer {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  gap: 10px;
+  background-image: linear-gradient(to right, rgb(17, 153, 142), rgb(56, 239, 125));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.toDoList .emptyContainer img {
+  margin-top: 80px;
+  width: 100px;
+  height: 100px;
+  transition: all 0.3s;
+}
+.toDoList .emptyContainer img:hover {
+  rotate: 5deg;
+}
+.toDoList .emptyContainer .emptyHeading {
+  font-weight: 500px;
+}
+.toDoList .emptyContainer .emptyHeading span {
+  font-weight: 900;
+}
+.toDoList .olContainer {
+  height: 90%;
+  padding: 100px 30px 30px 30px;
+  margin-bottom: 40px;
+}
+.toDoList .olContainer ol li {
+  display: flex;
+  list-style: none;
+  margin: 10px 0;
+  padding: 5px;
+  gap: 20px;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+.toDoList .olContainer ol li:hover {
+  gap: 10px;
+}
+.toDoList .olContainer ol li #text {
+  max-width: 500px;
+  padding: 5px 20px;
+  border-radius: 50px;
+  color: rgb(12, 12, 12);
+  background-image: linear-gradient(to right top, rgb(17, 153, 142), rgb(56, 239, 125));
+  cursor: pointer;
+  white-space: nowrap;
+}
+.toDoList .olContainer .listButton {
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.toDoList .olContainer .listbuttonDisabled {
+  opacity: 0.5;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.toDoList .olContainer #saveEditButton {
+  margin-right: 10px;
+  background-image: linear-gradient(to right top, rgb(17, 153, 142), rgb(56, 239, 125));
+}
+.toDoList .olContainer #editButton,
+.toDoList .olContainer #deleteButton,
+.toDoList .olContainer #moveUpButton,
+.toDoList .olContainer #moveDownButton {
+  background-color: rgb(183, 253, 210);
+}
+.toDoList .olContainer .textCompletedTrue {
+  text-decoration: line-through;
+  color: rgb(183, 253, 210);
+  opacity: 0.5;
+}
+.toDoList .olContainer .textCompletedFalse {
+  text-decoration: none;
+}
+.toDoList .notificationContainer {
+  width: inherit;
+  position: fixed;
+  backdrop-filter: blur(20px);
+  border-radius: 0 0 20px 20px;
+  padding: 5px;
+  font-size: 10px;
+  color: rgb(183, 253, 210);
+  text-transform: uppercase;
+  bottom: 10vh;
+}
+.toDoList .notificationContainer ::before {
+  border-radius: 0 0 20px 20px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(12, 12, 12);
+  opacity: 0.8;
+  z-index: -1;
+}
+.toDoList .notificationContainer .undoDeletedTask {
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 10px;
+  color: rgb(183, 253, 210);
+  text-transform: uppercase;
+}
+.toDoList .notificationContainer .undoDeletedTask span {
+  color: white;
+  font-weight: 500;
+}
+.toDoList .notificationContainer .undoDeletedTask button {
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  padding: 2px 5px;
+  color: rgb(36, 36, 36);
+  font-weight: bold;
+  background-color: rgb(56, 239, 125);
+}
+
+@media (max-width: 500px) {
+  .mainContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+  .mainContainer .toDoHead {
+    width: 80vw;
+    height: 30vh;
+    padding: 5vw;
+    margin: 0;
+  }
+  .mainContainer .toDoHead .newTaskInputContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  .mainContainer .toDoHead .addButton,
+  .mainContainer .toDoHead input {
+    padding: 0%;
+    margin: 1vw;
+    width: 20vw;
+  }
+  .mainContainer .toDoList {
+    width: 80vw;
+    height: 60vh;
+    padding: 0;
+    position: relative;
+  }
+  .mainContainer .toDoList .searchContainer {
+    width: inherit;
+    position: fixed;
+    border-radius: 20px;
+  }
+  .mainContainer .toDoList .searchContainer .toDoList select,
+  .mainContainer .toDoList .searchContainer .toDoList input {
+    height: 5vh;
+    margin: 0px;
+  }
+  .mainContainer .toDoList .olContainer {
+    padding: 12vh 1vw;
+    scale: 90%;
+  }
+  .mainContainer .toDoList .olContainer ol li {
+    gap: 1.5vw;
+  }
+  .mainContainer .toDoList .olContainer ol li:hover {
+    gap: 1vw;
+  }
+  .mainContainer .toDoList .olContainer ol li #text {
+    max-width: 200px;
+  }
+  .mainContainer .toDoList .olContainer .listButton {
+    padding: 10px 15px;
+  }
+  .mainContainer .toDoList .notificationContainer {
+    bottom: 3vh;
+    position: fixed;
+    backdrop-filter: blur(20px);
+    border-radius: 0px 0px 20px 20px;
+  }
+}
+@media (min-width: 501px) and (max-width: 730px) {
+  .y2doTitle {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .toDoHead button {
+    margin-bottom: 5vh;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

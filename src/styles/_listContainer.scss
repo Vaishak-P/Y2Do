@@ -1,0 +1,128 @@
+@use 'variables';
+@use 'mixins';
+.toDoList {
+    width: 50vw;
+    max-width: 700px;
+    position: relative;
+    padding-bottom: 30px;
+    text-align: center;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .searchContainer {
+        @include mixins.blurBox(20px 20px 0 0);
+        display: flex;
+        padding: 30px;
+        gap: 30px;
+        z-index: 1;
+        &::before {
+            @include mixins.blurBoxBefore(20px 20px 0 0);
+        }
+    }
+    .emptyContainer {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        gap: 10px;
+        background-image: linear-gradient(to right, variables.$primaryColor, variables.$secondaryColor);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        img {
+            margin-top: 80px;
+            width: 100px;
+            height: 100px;
+            transition: all 0.3s;
+            &:hover {
+                rotate: 5deg;
+            }
+        }
+        .emptyHeading {
+            font-weight: 500px;
+            span {
+                font-weight: 900;
+            }
+        }
+    }
+    .olContainer {
+        height: 90%;
+        padding: 100px 30px 30px 30px;
+        margin-bottom: 40px;
+        ol li {
+            display: flex;
+            list-style: none;
+            margin: 10px 0;
+            padding: 5px;
+            gap: 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            &:hover {
+                gap: 10px;
+            }
+            #text {
+                max-width: 500px;
+                padding: 5px 20px;
+                border-radius: 50px;
+                color: variables.$containerBgColor;
+                background-image: linear-gradient(to right top, variables.$primaryColor, variables.$secondaryColor);
+                cursor: pointer;
+                white-space: nowrap;
+            }
+        }
+        .listButton {
+            @include mixins.buttonStyle();
+        }
+        .listbuttonDisabled {
+            opacity: 0.5;
+            @include mixins.buttonStyle();
+        }
+        #saveEditButton {
+            margin-right: 10px;
+            background-image: linear-gradient(to right top, variables.$primaryColor, variables.$secondaryColor);
+        }
+        #editButton,
+        #deleteButton,
+        #moveUpButton,
+        #moveDownButton {
+            background-color: variables.$textColor;
+        }
+        .textCompletedTrue {
+            text-decoration: line-through;
+            color: variables.$textColor;
+            opacity: 0.5;
+        }
+        .textCompletedFalse {
+            text-decoration: none;
+        }
+    }
+    .notificationContainer {
+        @include mixins.blurBox(0 0 20px 20px);
+        padding: 5px;
+        font-size: 10px;
+        color: variables.$textColor;
+        text-transform: uppercase;
+        bottom: 10vh;
+        ::before {
+            @include mixins.blurBoxBefore(0 0 20px 20px);
+        }
+        .undoDeletedTask {
+            width: inherit;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 10px;
+            color: variables.$textColor;
+            text-transform: uppercase;
+            span {
+                color: variables.$inputTextColor;
+                font-weight: 500;
+            }
+            button {
+                @include mixins.buttonStyle(0.6rem);
+                padding: 2px 5px;
+                color: variables.$elementBgColor;
+                font-weight: bold;
+                background-color: variables.$secondaryColor;
+            }
+        }
+    }
+}
